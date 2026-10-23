@@ -42,7 +42,7 @@ Gemfile:
 .rubocop.yml:
   default_configs:
     AllCops:
-      TargetRubyVersion: '2.4'
+      TargetRubyVersion: '4.0'
     Style/WordArray:
       EnforcedStyle: percent
     Layout/EmptyLinesAroundBlockBody:
@@ -56,78 +56,39 @@ Gemfile:
   user: adobeinc
   secure: "hTj2dy3z0h26hzY3XdJop0IMac8DYu/z949XRTpo/pkVn/dSMnGbREFkyBO99dicdRlQAwbO7VFZTCfKUrDxA3p/+ECh7mjwPcYwM8oTryarGpcmXso7vROkdxzObOHUZn33A5fKzYZqbgh54zI3ngwFkQKTyyDgMU+7RolsO3dBbhV6jEstF4a4V2DCJrPIDMS3nuLzhRP6dn82P8lrOaunW/Gg8j5STNPiv305hgzP9n2UZb+h1P47aOsS60/Lc1nbxCN5PyymKHGDrMPX6RpsE9PpvWNtnr4rViINdeP5V5H+g7UKxWypVn2msKw+slW2RFYekaRum74fQDpF7IOzh8FLwWNPvJK7GYXxkzVul2VnJw7xSQHTkhfTXcwsBn+lrwY7wkjmW9GP6gv+BlTiMXQTWQR+6AK41MXDjR9fj7cqUK/K+bgnPw1Q0SdPoX0c+5blhbKT6rDeYMv8KBH4H/b7scuF+XBMaj0hxUA3ErZBk63KhjABFz/YfTG3/b5HDeOggpolpn5NsOrhOTV0EPXuaPfles7H2c9Vd1A7GDh2OyuSaiu7Z9Vk2t27HQzQ2m2JEQJ1XsM+dYrHCYNBP6WcLUe4pfYGex2HHHohmn8I81Ag3JVvub1ScsloScUK0qjHiKEVy9cilcTQ7AGx0BgMwM03W3rho1nSIAo="
   includes:
-  - bundler_args:
+  - bundler_args: ""
     dist: xenial
-    env: PLATFORMS=debian_puppet5
-    rvm: 2.5.1
+    env: PLATFORMS=debian_puppet8
+    rvm: 3.2.2
     before_script:
       - bundle exec rake 'litmus:provision_list[debian]'
-      - bundle exec rake 'litmus:install_agent[puppet5]'
+      - bundle exec rake 'litmus:install_agent[puppet8]'
       - bundle exec rake litmus:install_module
     script:
       - bundle exec rake litmus:acceptance:parallel
     services: docker
     sudo: required
     stage: acceptance
-  - bundler_args:
+  - bundler_args: ""
     dist: xenial
-    env: PLATFORMS=debian_puppet6
-    rvm: 2.5.1
-    before_script:
-      - bundle exec rake 'litmus:provision_list[debian]'
-      - bundle exec rake 'litmus:install_agent[puppet6]'
-      - bundle exec rake litmus:install_module
-    script:
-      - bundle exec rake litmus:acceptance:parallel
-    services: docker
-    sudo: required
-    stage: acceptance
-  - bundler_args:
-    dist: xenial
-    env: PLATFORMS=ubuntu_puppet5
-    rvm: 2.5.1
+    env: PLATFORMS=ubuntu_puppet8
+    rvm: 3.2.2
     before_script:
       - bundle exec rake 'litmus:provision_list[ubuntu]'
-      - bundle exec rake 'litmus:install_agent[puppet5]'
+      - bundle exec rake 'litmus:install_agent[puppet8]'
       - bundle exec rake litmus:install_module
     script:
       - bundle exec rake litmus:acceptance:parallel
     services: docker
     sudo: required
     stage: acceptance
-  - bundler_args:
+  - bundler_args: ""
     dist: xenial
-    env: PLATFORMS=ubuntu_puppet6
-    rvm: 2.5.1
-    before_script:
-      - bundle exec rake 'litmus:provision_list[ubuntu]'
-      - bundle exec rake 'litmus:install_agent[puppet6]'
-      - bundle exec rake litmus:install_module
-    script:
-      - bundle exec rake litmus:acceptance:parallel
-    services: docker
-    sudo: required
-    stage: acceptance
-  - bundler_args:
-    dist: xenial
-    env: PLATFORMS=el_puppet5
-    rvm: 2.5.1
+    env: PLATFORMS=el_puppet8
+    rvm: 3.2.2
     before_script:
       - bundle exec rake 'litmus:provision_list[el]'
-      - bundle exec rake 'litmus:install_agent[puppet5]'
-      - bundle exec rake litmus:install_module
-    script:
-      - bundle exec rake litmus:acceptance:parallel
-    services: docker
-    sudo: required
-    stage: acceptance
-  - bundler_args:
-    dist: xenial
-    env: PLATFORMS=el_puppet6
-    rvm: 2.5.1
-    before_script:
-      - bundle exec rake 'litmus:provision_list[el]'
-      - bundle exec rake 'litmus:install_agent[puppet6]'
+      - bundle exec rake 'litmus:install_agent[puppet8]'
       - bundle exec rake litmus:install_module
     script:
       - bundle exec rake litmus:acceptance:parallel

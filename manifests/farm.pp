@@ -179,13 +179,13 @@ define dispatcher::farm (
     fail('You must include the Apache class before using any dispatcher class or resources.')
   }
 
-  if $::osfamily == 'RedHat' or $::operatingsystem =~ /^[Aa]mazon$/ {
+  if $facts['os']['family'] == 'RedHat' or $facts['os']['name'] =~ /^[Aa]mazon$/ {
     $_farm_path = $::apache::mod_dir
 
-  } elsif $::osfamily == 'Debian' {
+  } elsif $facts['os']['family'] == 'Debian' {
     $_farm_path = $::apache::mod_enable_dir
   } else {
-    fail("Class['dispatcher']: Unsupported osfamily: ${::osfamily}")
+    fail("Class['dispatcher']: Unsupported osfamily: ${facts['os']['family']}")
   }
 
   if $priority < 10 {

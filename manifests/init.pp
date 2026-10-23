@@ -106,14 +106,14 @@ class dispatcher (
     fail('You must include the Apache class before using any dispatcher class or resources.')
   }
 
-  if $::osfamily == 'RedHat' or $::operatingsystem =~ /^[Aa]mazon$/ {
+  if $facts['os']['family'] == 'RedHat' or $facts['os']['name'] =~ /^[Aa]mazon$/ {
     $_mod_path = "${::apache::httpd_dir}/${::apache::lib_path}"
     $_farm_path = $::apache::mod_dir
-  } elsif $::osfamily == 'Debian' {
+  } elsif $facts['os']['family'] == 'Debian' {
     $_mod_path = $::apache::lib_path
     $_farm_path = $::apache::mod_enable_dir
   } else {
-    fail("Class['dispatcher']: Unsupported osfamily: ${::osfamily}")
+    fail("Class['dispatcher']: Unsupported osfamily: ${facts['os']['family']}")
   }
   $_filename = basename($module_file)
 

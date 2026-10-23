@@ -16,7 +16,7 @@ script:
   - 'SIMPLECOV=yes bundle exec rake $CHECK'
 bundler_args: --without system_tests
 rvm:
-  - 2.5.7
+  - 3.2.2
 stages:
   - static
   - spec
@@ -31,69 +31,35 @@ jobs:
       env: CHECK="check:symlinks check:git_ignore check:dot_underscore check:test_file rubocop syntax lint metadata_lint"
       stage: static
     -
-      env: PUPPET_GEM_VERSION="~> 5.0" CHECK=parallel_spec
-      rvm: 2.4.5
+      env: PUPPET_GEM_VERSION="~> 8.0" CHECK=parallel_spec
+      rvm: 3.2.2
       stage: spec
     -
-      env: PUPPET_GEM_VERSION="~> 6.0" CHECK=parallel_spec
-      rvm: 2.5.7
-      stage: spec
-    -
-      before_script: ["bundle exec rake 'litmus:provision_list[debian]'", "bundle exec rake 'litmus:install_agent[puppet5]'", "bundle exec rake litmus:install_module"]
-      bundler_args: 
+      before_script: ["bundle exec rake 'litmus:provision_list[debian]'", "bundle exec rake 'litmus:install_agent[puppet8]'", "bundle exec rake litmus:install_module"]
+      bundler_args: ""
       dist: xenial
-      env: PLATFORMS=debian_puppet5
-      rvm: 2.5.1
+      env: PLATFORMS=debian_puppet8
+      rvm: 3.2.2
       script: ["bundle exec rake litmus:acceptance:parallel"]
       services: docker
       stage: acceptance
       sudo: required
     -
-      before_script: ["bundle exec rake 'litmus:provision_list[debian]'", "bundle exec rake 'litmus:install_agent[puppet6]'", "bundle exec rake litmus:install_module"]
-      bundler_args: 
+      before_script: ["bundle exec rake 'litmus:provision_list[ubuntu]'", "bundle exec rake 'litmus:install_agent[puppet8]'", "bundle exec rake litmus:install_module"]
+      bundler_args: ""
       dist: xenial
-      env: PLATFORMS=debian_puppet6
-      rvm: 2.5.1
+      env: PLATFORMS=ubuntu_puppet8
+      rvm: 3.2.2
       script: ["bundle exec rake litmus:acceptance:parallel"]
       services: docker
       stage: acceptance
       sudo: required
     -
-      before_script: ["bundle exec rake 'litmus:provision_list[ubuntu]'", "bundle exec rake 'litmus:install_agent[puppet5]'", "bundle exec rake litmus:install_module"]
-      bundler_args: 
+      before_script: ["bundle exec rake 'litmus:provision_list[el]'", "bundle exec rake 'litmus:install_agent[puppet8]'", "bundle exec rake litmus:install_module"]
+      bundler_args: ""
       dist: xenial
-      env: PLATFORMS=ubuntu_puppet5
-      rvm: 2.5.1
-      script: ["bundle exec rake litmus:acceptance:parallel"]
-      services: docker
-      stage: acceptance
-      sudo: required
-    -
-      before_script: ["bundle exec rake 'litmus:provision_list[ubuntu]'", "bundle exec rake 'litmus:install_agent[puppet6]'", "bundle exec rake litmus:install_module"]
-      bundler_args: 
-      dist: xenial
-      env: PLATFORMS=ubuntu_puppet6
-      rvm: 2.5.1
-      script: ["bundle exec rake litmus:acceptance:parallel"]
-      services: docker
-      stage: acceptance
-      sudo: required
-    -
-      before_script: ["bundle exec rake 'litmus:provision_list[el]'", "bundle exec rake 'litmus:install_agent[puppet5]'", "bundle exec rake litmus:install_module"]
-      bundler_args: 
-      dist: xenial
-      env: PLATFORMS=el_puppet5
-      rvm: 2.5.1
-      script: ["bundle exec rake litmus:acceptance:parallel"]
-      services: docker
-      stage: acceptance
-      sudo: required
-    -
-      before_script: ["bundle exec rake 'litmus:provision_list[el]'", "bundle exec rake 'litmus:install_agent[puppet6]'", "bundle exec rake litmus:install_module"]
-      bundler_args: 
-      dist: xenial
-      env: PLATFORMS=el_puppet6
-      rvm: 2.5.1
+      env: PLATFORMS=el_puppet8
+      rvm: 3.2.2
       script: ["bundle exec rake litmus:acceptance:parallel"]
       services: docker
       stage: acceptance
